@@ -1,4 +1,4 @@
-// Author: Rahul V.B @ 11-06-23 ver.4.9
+// Author: Rahul V.B @ 11-06-23 ver. 4.9
 // Manage script configuration here
 const g = {
   subjectFilter: 'CONTACTRAHUL',
