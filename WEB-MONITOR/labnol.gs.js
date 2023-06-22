@@ -107,16 +107,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
 /*
 
-   Website Monitor 6.0 by Digital Inspiration    
+   Website Monitor 9.2 by Rahul V.B technologies    
    ==========================================   
 
-   Published by Amit Agarwal on 02/14/2013       
-   Last updated by @labnol on 01/08/2019         
+   Published by rahul V.B on 06/22/2023       
+   Last updated by @labnol_rvb27 on 06/22/2023         
 
-   Tutorial: http://labnol.org/?p=21060         
+   Site: https://www.rahulvb.com
 
-   email: amit@labnol.org   
-   twitter: @labnol   
+   email: support@rahulvb.com  
+   twitter: @rahulvb27
+   instagram: rahulvb27   
    
 */
 
