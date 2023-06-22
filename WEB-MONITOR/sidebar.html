@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+    <?!= include('hints'); ?>
+        <style>
+          body {
+            font-family: 'Open Sans', serif;
+          }
+          
+          h2 {
+            font-family: 'Roboto', sans-serif;
+            text-transform:uppercase;
+            font-size: 150%;
+            letter-spacing: 3px;
+          }
+            p {
+              color: #222;
+              font-weight: normal;
+              font-size: 13px;
+              line-height: 18px;
+            }
+            
+            p a {
+                color: #111;
+              text-decoration: underline;
+            }
+            
+            label {
+                font-size: 95%;
+                color: #444;
+            }
+            
+            label span {
+                font-weight: normal;
+                color: #666;
+                font-size: 90%
+            }
+            
+            input {
+                width: 90%;
+            }
+            
+            h3 {
+                font-family: 'Roboto', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+            
+            #message {
+                color: #db7093
+            }
+            
+            .bottom {
+                padding: 10px 20px;
+                background: #f4f4f4;
+            }
+        </style>
+        <script>
+            function showMessage(e) {
+                document.getElementById("message").innerHTML = e;
+            }
+
+            function showErrorMessage(e) {
+                document.getElementById("message").innerHTML = '<span class="error">' + e + '</span>';
+            }
+
+            function startMonitor() {
+
+                var settings = {
+                    email: document.getElementById("email").value.trim(),
+                    site: document.getElementById("site").value.trim(),
+                    ga: document.getElementById("ga").value.trim(),
+                    sheet: "<?= sheet; ?>"
+                };
+
+                if (!settings.email.match(/\S+@\S+/)) {
+                    showErrorMessage("Please enter a valid email address.");
+                    return;
+                }
+
+                if (!settings.site.match(/https?:\/\/.{3,}/i)) {
+                    showErrorMessage("Please enter a valid website URL");
+                    return;
+                }
+
+                if (settings.ga !== "") {
+                    if (!settings.ga.match(/..\-\d+\-\d+/)) {
+                        showErrorMessage("Please enter a valid Google Analytics Id");
+                        return;
+                    }
+                }
+
+                showMessage("<img src='https://i.imgur.com/b7BJ2nW.gif' /> Processing, please wait..");
+
+                google.script.run
+                    .withFailureHandler(onFailure)
+                    .withSuccessHandler(showMessage)
+                    .saveSettings(JSON.stringify(settings));
+            }
+
+            function stopMonitor() {
+
+                showMessage("<img src='https://i.imgur.com/b7BJ2nW.gif' /> Stopping, please wait..");
+
+                google.script.run
+                    .withFailureHandler(onFailure)
+                    .withSuccessHandler(showMessage)
+                    .stopMonitor();
+            }
+
+            function onFailure(e) {
+                showErrorMessage(e.message);
+                enableSaveButton_();
+            }
+        </script>
+</head>
+<div class="sidebar branding-below">
+    <div class="block">
+        <h2>Site Monitor</h2>
+        <p>The <a href="http://www.rahulvb.com/web-monitor" target="_blank">Site monitor</a> will send an email alert when QWERTY.I/O SDMCET website does down.</p>
+    </div>
+    <div class="block">
+        <label for="site">Website address: <small><a class="hint--top  hint--medium" data-hint="Enter the address of the website you wish to monitor">Help</a></small>
+        </label>
+        <input type="text" id="site" placeholder="Enter site URL including https://" value="<?= site; ?>">
+    </div>
+    <div class="block">
+        <label for="email">Notify these users: <small><a class="hint--top  hint--medium" data-hint="You can enter multiple email addresses, comma separated">Help</a></small></label>
+        <input type="email" id="email" placeholder="Enter your email address" value="<?= email; ?>">
+    </div>
+    <div class="block">
+        <label for="ga">Google Analytics Id: <small><a class="hint--top  hint--medium" data-hint="[Optional] Log the downtime activity in your Google Analytics account">Help</a></small></label>
+        <input type="text" id="ga" placeholder="e.g. UA-123456-78" value="<?=ga; ?>">
+    </div>
+    <div class="block" id="buttonbar">
+        <button onclick="startMonitor()" class="blue" id="btn-start">Start Monitoring</button> &nbsp; <a href="https://www.rahulvb.com/technologies/web-monitor/documentation" target="_blank" class="button greena">Help</a>
+        <button onclick="doStop()" id="btn-stop" style="display:none">Stop</button>
+    </div>
+    <div class="block" id="message">
+        <img src='https://i.imgur.com/b7BJ2nW.gif' /> Loading.. </div>
+  
+    <div class="block">
+              <h3>Reach Developer</h3>
+        <p>The script is maintained by <a target="_blank" href="https://www.rahulvb.com/technologies">Rahul V.B Technologies</a>. </p>
+          <p>Check our <a href="https://www.rahulvb.com" target="_blank">website</a> for more interesting projects made with <a href="https://www.rahulvb.com/technologies/g-app-scripts" target="_blank">Google Script</a>.</p>
+    </div>
+  
+</div>
+<div class="sidebar bottom">
+ <p>➩ For help, DM us <a target="_blank" href="https://instagram.com/rahulvb27">@rahulvb27</a> or send us an email at <em>rahulvb.com@gmail.com</em></p>
+</div>
+<script>
+    showMessage(" &nbsp; ");
+</script>
+
+</html>
