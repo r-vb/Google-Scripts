@@ -24,7 +24,7 @@ function fetchGitHubRepoCount() {
   var repoCount = userData.public_repos;
   
   // Log the result (you can also update a specific cell in the spreadsheet)
-  Logger.log("GitHub Repositories Count for " + githubUsername + ": " + repoCount);
+  Logger.log("GitHub Repositories Count for " + githubUsername + ": " + repoCount);  // use this only if you are going to log data into spreadsheet
   
   // Check if the previous count is stored in the Script Properties
   var scriptProperties = PropertiesService.getScriptProperties();
